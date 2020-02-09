@@ -20,4 +20,4 @@ before_install:
   - aws --version
 
 install:
-  - aws --version
+  - echo aws --version
