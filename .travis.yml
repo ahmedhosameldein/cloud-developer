@@ -25,4 +25,4 @@ before_install:
   - aws-iam-authenticator help
 
 install:
-  - echo 'hello!'
+  - kubectl get nodes --kubeconfig=course-03/exercises/Deployment/.kube/config
