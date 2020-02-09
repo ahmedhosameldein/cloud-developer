@@ -18,4 +18,4 @@ before_install:
 
 
 install:
- - echo 'hello world!'
+ - echo 'hello udacity!'
