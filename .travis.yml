@@ -18,4 +18,4 @@ before_install:
 
 
 install:
- - echo 'hello udacity!'
+ - docker-compose -f course-03/exercises/Deployment/docker-compose.yaml build --parallel 
