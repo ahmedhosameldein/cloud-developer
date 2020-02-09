@@ -6,7 +6,10 @@ docker build -t ahmedhosam/udacity-frontend .
 
 # run docker containers
 docker run -d --rm --publish 8080:8080 -v C:\Users\ahmed.hosam\.aws:/root/.aws --env-file env.list --name feed ahmedhosam/udacity-restapi-feed
-docker run -d --rm --publish 8081:8080 -v "%UserProfile%\.aws":/root/.aws --env-file env.list --name user ahmedhosam/udacity-restapi-user
+docker run -d --rm --publish 8081:8080 -v C:\Users\ahmed.hosam\.aws:/root/.aws --env-file env.list --name user ahmedhosam/udacity-restapi-user
+
+# stop container
+docker stop ...
 
 #To completely remove a container
 docker rm c1
