@@ -20,4 +20,4 @@ before_install:
   - aws --version
 
 install:
-  - kubectl get nodes --kubeconfig=course-03/exercises/Deployment/.kube/config
+  - aws --version
