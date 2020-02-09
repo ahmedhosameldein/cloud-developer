@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: reverseproxy
+  labels:
+    app: reverseproxy
+spec:
+  containers:
+  - name: reverseproxy
+    image: ahmedhosam/reverseproxy
+    imagePullPolicy: Always          
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "1024Mi"
+        cpu: "500m"       
+    ports:
+    - containerPort: 8080
+  restartPolicy: Always

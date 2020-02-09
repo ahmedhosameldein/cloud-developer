@@ -1,0 +1,72 @@
+# build docker images
+docker build -t ahmedhosam/udacity-restapi-feed .
+docker build -t ahmedhosam/udacity-restapi-user .
+docker build -t ahmedhosam/reverseproxy .
+docker build -t ahmedhosam/udacity-frontend .
+
+# run docker containers
+docker run -d --rm --publish 8080:8080 -v C:\Users\ahmed.hosam\.aws:/root/.aws --env-file env.list --name feed ahmedhosam/udacity-restapi-feed
+docker run -d --rm --publish 8081:8080 -v "%UserProfile%\.aws":/root/.aws --env-file env.list --name user ahmedhosam/udacity-restapi-user
+
+#To completely remove a container
+docker rm c1
+
+#The docker image is still available locally. To remove the image as well
+docker image rm ahmedhosam/reverseproxy
+
+# docker compose
+docker-compose up -d
+
+# create AKS cluster
+eksctl create cluster -f cluster.yaml --write-kubeconfig --set-kubeconfig-context
+
+# get cluster nodes
+kubectl get nodes
+
+# deploy a pod
+kubectl apply -f pod.yaml
+
+# get pods
+kubectl get pod -o wide
+
+# delete pod
+kubectl delete pod feed-pod
+
+# deploy deployment
+kubectl apply -f feed-deployment.yaml
+
+# See the running deployments
+kubectl get deployment
+
+# See the replica sets
+kubectl get rs
+
+# See the pods
+kubectl get pod
+
+# describe pod
+kubectl describe pods ${POD_NAME}
+
+#get pod logs
+kubectl logs reverseproxy
+
+# apply config map
+kubectl apply -f env-configmap.yaml
+
+# get config maps
+kubectl get configmaps
+
+# get secrets
+kubectl get secrets
+
+# forward ports to pods for testing (local port:pod port)
+kubectl port-forward pod/{reverseproxy...} 8080:8080
+
+# get running services
+kubectl get svc 
+
+# forward ports to services for testing (local port:pod port)
+kubectl port-forward service/{reverseproxy...} 8080:8080
+
+#scale
+kubectl scale deployment/{name} --replicas 10

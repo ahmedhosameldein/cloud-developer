@@ -1,0 +1,48 @@
+version: "3"
+services:
+  reverseproxy:
+      image: ahmedhosam/reverseproxy
+      ports:
+          - 8080:8080
+      restart: always
+      depends_on:
+        - backend-user
+        - backend-feed     
+  backend-user:
+    image: ahmedhosam/udacity-restapi-user
+    ports:
+        - 8081:8080
+    restart: always    
+    volumes:
+      - C:\Users\ahmed.hosam\.aws:/root/.aws
+    environment:
+      POSTGRESS_USERNAME: postgres
+      POSTGRESS_PASSWORD: udagramclouddev
+      POSTGRESS_DB: postgres
+      POSTGRESS_HOST: udagram-clouddev.csyhzbuytalf.eu-west-3.rds.amazonaws.com
+      AWS_REGION: eu-west-3 
+      AWS_PROFILE: default
+      AWS_BUCKET: udagram-bucket-dev
+      JWT_SECRET: helloworld
+      URL: "http://localhost:8100"
+  backend-feed:
+    image: ahmedhosam/udacity-restapi-feed
+    ports:
+        - 8082:8080
+    restart: always    
+    volumes:
+      - C:\Users\ahmed.hosam\.aws:/root/.aws
+    environment:
+      POSTGRESS_USERNAME: postgres
+      POSTGRESS_PASSWORD: udagramclouddev
+      POSTGRESS_DB: postgres
+      POSTGRESS_HOST: udagram-clouddev.csyhzbuytalf.eu-west-3.rds.amazonaws.com
+      AWS_REGION: eu-west-3 
+      AWS_PROFILE: default
+      AWS_BUCKET: udagram-bucket-dev
+      JWT_SECRET: helloworld
+      URL: "http://localhost:8100"
+  frontend:
+    image: ahmedhosam/udacity-frontend
+    ports:
+      - 8100:80
